@@ -29,10 +29,15 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
 
       # 2. SNYK Security Scan
+      # 1. Install dependencies so Snyk can see the full dependency tree
+      - name: Install Dependencies
+        run: npm install
+
+      # 2. Run Snyk to check for vulnerabilities in those dependencies
       - name: Snyk Monitor
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
+          args: --severity-threshold=low # This ensures it catches everything for our report
           command: monitor
-          args: --severity-threshold=low
