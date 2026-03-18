@@ -21,6 +21,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=IIIT-n-HA_Backend
+            -Dsonar.organization=iiit-n-ha
+            -Dsonar.sources=src
+            -Dsonar.host.url=https://sonarcloud.io
 
       # 2. SNYK Security Scan
       - name: Snyk Open Source Scan
